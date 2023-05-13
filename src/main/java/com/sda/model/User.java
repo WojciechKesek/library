@@ -1,13 +1,16 @@
 package com.sda.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class User {
 
     private String firstName;
@@ -15,7 +18,7 @@ public class User {
     private String login;
     private String email;
     private String password;
-    private Adress adress;
+    private Address adress;
     private List<Role> role;
 
 }
