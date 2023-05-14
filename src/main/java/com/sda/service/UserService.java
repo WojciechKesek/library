@@ -1,5 +1,6 @@
 package com.sda.service;
 
+import com.sda.ActiveUserUtil;
 import com.sda.api.UserLoginData;
 import com.sda.model.User;
 import com.sda.provider.FileUserProvider;
@@ -23,7 +24,9 @@ public class UserService implements UserLoginChecker {
     public boolean checkLogin(UserLoginData userLoginData) {
         return userProvider.getAllUsers().stream()
                 .filter(user -> checkIfUserExist(userLoginData, user))
-                .anyMatch(user -> checkIfUserExist(userLoginData, user));
+                .filter(user -> checkIfUserExist(userLoginData, user))
+                .peek(ActiveUserUtil::setActiveUser)
+                .findAny().isPresent();
     }
 
     private static Predicate<User> checkIfUserPasswordIsOk(UserLoginData userLoginData) {
