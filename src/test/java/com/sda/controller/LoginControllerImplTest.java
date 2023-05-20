@@ -7,6 +7,7 @@ import com.sda.view.LoginView;
 import com.sda.view.MainMenuView;
 import com.sda.view.View;
 import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.*;
 
 
@@ -18,7 +19,7 @@ class LoginControllerImplTest {
     private static final String INCORRECT_PASSWORD = "incorrectPassword";
 
     @Test
-    void whenUserLoginDataIsCorrectShouldReturnMainMenuView(){
+    void whenUserLoginDataIsCorrectShouldReturnMainMenuView() {
         // given
         LoginController loginController = new LoginControllerImpl(
                 new UserService(UserDataFactory::getExampleUserData)
@@ -30,7 +31,7 @@ class LoginControllerImplTest {
     }
 
     @Test
-    void whenUserLoginDataIsCorrectShouldReturnLoginView(){
+    void whenUserLoginDataIsCorrectShouldReturnLoginView() {
         // given
         LoginController loginController = new LoginControllerImpl(
                 new UserService(UserDataFactory::getExampleUserData)
@@ -42,7 +43,7 @@ class LoginControllerImplTest {
     }
 
     @Test
-    void whenUserLoginExistButPasswordIsIncorrectShouldReturnLoginView(){
+    void whenUserLoginExistButPasswordIsIncorrectShouldReturnLoginView() {
         // given
         LoginController loginController = new LoginControllerImpl(
                 new UserService(UserDataFactory::getExampleUserData)

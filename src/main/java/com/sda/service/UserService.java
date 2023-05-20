@@ -6,11 +6,9 @@ import com.sda.model.User;
 import com.sda.provider.FileUserProvider;
 import com.sda.provider.UserProvider;
 
-import java.util.function.Predicate;
-
 public class UserService implements UserLoginChecker {
 
-    private UserProvider userProvider;
+    private final UserProvider userProvider;
 
     public UserService() {
         userProvider = new FileUserProvider();
@@ -23,18 +21,22 @@ public class UserService implements UserLoginChecker {
     @Override
     public boolean checkLogin(UserLoginData userLoginData) {
         return userProvider.getAllUsers().stream()
-                .filter(user -> checkIfUserExist(userLoginData, user))
-                .filter(user -> checkIfUserExist(userLoginData, user))
+                .filter(user -> checkIfUserExist(
+                        userLoginData, user))
+                .filter(user -> checkIfUserPasswordIsCorrect(
+                        userLoginData, user))
                 .peek(ActiveUserUtil::setActiveUser)
                 .findAny().isPresent();
     }
 
-    private static Predicate<User> checkIfUserPasswordIsOk(UserLoginData userLoginData) {
-        return user -> userLoginData.getPassword().equals(user.getPassword());
+    private boolean checkIfUserPasswordIsCorrect(UserLoginData userLoginData,
+                                                 User user) {
+        return userLoginData.getPassword().equals(user.getPassword());
     }
 
     private boolean checkIfUserExist(UserLoginData userLoginData, User user) {
-        return user.getLogin().equals(userLoginData.getLogin());
+        return user.getLogin().equals(userLoginData.getLogin()
+        );
     }
 }
 

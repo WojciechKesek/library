@@ -35,12 +35,13 @@ public class UserDataFactory {
             List.of(Role.USER)
     );
 
-    private static final Set<User> EXAMPLE_USER_DATA = Set.of(USER1,USER2);
+    private static final Set<User> EXAMPLE_USER_DATA = Set.of(USER1, USER2);
 
-    public static Set<User> getExampleUserData(){
+    public static Set<User> getExampleUserData() {
         return EXAMPLE_USER_DATA;
     }
-    public static User getExampleSingleUser(){
+
+    public static User getExampleSingleUser() {
         return USER1;
     }
 }

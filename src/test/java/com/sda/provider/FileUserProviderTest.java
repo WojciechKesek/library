@@ -1,15 +1,12 @@
 package com.sda.provider;
 
 import com.sda.UserDataFactory;
-import com.sda.model.Address;
-import com.sda.model.Role;
 import com.sda.model.User;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
 import java.util.Set;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class FileUserProviderTest {
 

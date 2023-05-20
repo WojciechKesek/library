@@ -26,7 +26,9 @@ public class FileUserProvider implements UserProvider {
     public Set<User> getAllUsers() {
         Set<User> users = Set.of();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
-            users = bufferedReader.lines().map(this::mapToUser).collect(Collectors.toSet());
+            users = bufferedReader.lines()
+                    .map(this::mapToUser)
+                    .collect(Collectors.toSet());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -34,29 +36,29 @@ public class FileUserProvider implements UserProvider {
     }
 
     private User mapToUser(String userDataLine) {
-        var dataStringArray = userDataLine.split(";");
+        String[] splitUserData = userDataLine.split(";");
         return User.builder()
-                .firstName(dataStringArray[0])
-                .lastName(dataStringArray[1])
-                .login(dataStringArray[2])
-                .email(dataStringArray[3])
-                .password(dataStringArray[4])
-                .adress(mapToAdress(dataStringArray))
-                .role(mapToRole(dataStringArray))
+                .firstName(splitUserData[0])
+                .lastName(splitUserData[1])
+                .login(splitUserData[2])
+                .email(splitUserData[3])
+                .password(splitUserData[4])
+                .adress(mapToAddress(splitUserData))
+                .role(mapToRoles(splitUserData))
                 .build();
     }
 
-    private Address mapToAdress(String[] dataStringArray) {
+    private Address mapToAddress(String[] splitUserData) {
         return Address.builder()
-                .street(dataStringArray[5])
-                .buildingNo(dataStringArray[6])
-                .apartmentNo(dataStringArray[7])
-                .postalCode(dataStringArray[8])
+                .street(splitUserData[5])
+                .buildingNo(splitUserData[6])
+                .apartmentNo(splitUserData[7])
+                .postalCode(splitUserData[8])
                 .build();
     }
 
-    private List<Role> mapToRole(String[] dataStringArray) {
-        return Arrays.stream(dataStringArray[9].split("/"))
+    private List<Role> mapToRoles(String[] splitUserData) {
+        return Arrays.stream(splitUserData[9].split("/"))
                 .map(Role::valueOf)
                 .collect(Collectors.toList());
     }

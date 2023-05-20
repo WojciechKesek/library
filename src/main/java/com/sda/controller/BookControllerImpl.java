@@ -24,6 +24,7 @@ public class BookControllerImpl implements BookController {
     public Map<Integer, Book> getAllBooks() {
         return bookDisplayUtil.getItems(bookProvider.getAllBooks());
     }
+
     @Override
     public Map<Integer, Book> getBooksByAuthor(Author author) {
         return bookDisplayUtil.getItems(bookProvider.getBooksByAuthor(author));

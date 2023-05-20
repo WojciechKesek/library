@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 import java.time.Year;
 
 @Data
@@ -21,6 +20,6 @@ public class Book {
     @Override
     public String toString() {
 
-        return  title + ", " + isbn + ", " + author + ", " + releasedYear;
+        return title + ", " + isbn + ", " + author + ", " + releasedYear;
     }
 }
